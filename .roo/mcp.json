@@ -1,0 +1,58 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {
+        "DEFAULT_MINIMUM_TOKENS": ""
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+"args": [
+  "-y",
+  "@modelcontextprotocol/server-filesystem",
+  "D:\\1"
+],
+"alwaysAllow": [
+        "read_file",
+        "list_allowed_directories"
+      ]
+    },
+    "sequentialthinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "BSAbUyFmqOWNzJLV9h4OtbLAjrnoiHj"
+      }
+    },
+    "mcp-server-firecrawl": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@mendableai/mcp-server-firecrawl",
+"--key",
+"fc-f9fc77cd579f43eca18d3e59ee698025",
+        "--profile",
+        "ratty-donkey-M4QHTb"
+      ]
+    }
+  }
+}
