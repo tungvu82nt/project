@@ -9,7 +9,7 @@ const languages = [
   { code: 'zh' as Language, name: 'Chinese', flag: '🇨🇳', nativeName: '中文' }
 ];
 
-export const LanguageSelector: React.FC = () => {
+const LanguageSelector: React.FC = () => {
   const { language, setLanguage, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -80,3 +80,5 @@ export const LanguageSelector: React.FC = () => {
     </div>
   );
 };
+
+export default LanguageSelector;

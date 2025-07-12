@@ -1,0 +1,77 @@
+{
+  "users": {
+    "testUser": {
+      "name": "Nguyễn Văn Test",
+      "email": "test@yapee.com",
+      "phone": "+84123456789"
+    },
+    "adminUser": {
+      "name": "Admin User",
+      "email": "admin@yapee.com",
+      "phone": "+84987654321"
+    }
+  },
+  "products": {
+    "searchTerms": {
+      "valid": [
+        "laptop",
+        "phone",
+        "headphone",
+        "camera",
+        "tablet"
+      ],
+      "invalid": [
+        "xyz123",
+        "!@#$%",
+        "nonexistent"
+      ],
+      "empty": ""
+    },
+    "categories": [
+      "Electronics",
+      "Clothing",
+      "Books",
+      "Home",
+      "Sports"
+    ],
+    "priceRanges": [
+      {
+        "min": 0,
+        "max": 100
+      },
+      {
+        "min": 100,
+        "max": 500
+      },
+      {
+        "min": 500,
+        "max": 1000
+      },
+      {
+        "min": 1000,
+        "max": 5000
+      }
+    ]
+  },
+  "contact": {
+    "validForm": {
+      "name": "Nguyễn Văn Test",
+      "email": "test@yapee.com",
+      "subject": "Kiểm tra chức năng liên hệ",
+      "message": "Đây là tin nhắn test để kiểm tra form liên hệ hoạt động đúng không. Xin chào từ automation test!"
+    },
+    "invalidForm": {
+      "name": "",
+      "email": "invalid-email",
+      "subject": "",
+      "message": ""
+    }
+  },
+  "urls": {
+    "home": "/",
+    "products": "/products",
+    "contact": "/contact",
+    "cart": "/cart",
+    "about": "/about"
+  }
+}

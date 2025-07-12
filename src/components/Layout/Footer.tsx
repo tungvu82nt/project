@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
-export const Footer: React.FC = () => {
+const Footer: React.FC = () => {
   const { t } = useLanguage();
 
   return (
@@ -14,9 +14,9 @@ export const Footer: React.FC = () => {
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">E</span>
+                <span className="text-white font-bold text-xl">Y</span>
               </div>
-              <span className="text-xl font-bold">EliteStore</span>
+              <span className="text-xl font-bold">Yapee</span>
             </div>
             <p className="text-gray-400 mb-4">
               {t('footer.aboutUs')}
@@ -41,7 +41,6 @@ export const Footer: React.FC = () => {
               <li><Link to="/products" className="text-gray-400 hover:text-white transition-colors">{t('nav.products')}</Link></li>
               <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors">{t('footer.aboutUs')}</Link></li>
               <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">{t('footer.contactUs')}</Link></li>
-              <li><Link to="/support" className="text-gray-400 hover:text-white transition-colors">{t('footer.support')}</Link></li>
             </ul>
           </div>
 
@@ -62,15 +61,15 @@ export const Footer: React.FC = () => {
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-400">123 Business Ave, City, State 12345</span>
+                <span className="text-gray-400">74 đường số 13, Phường Bình Trị Đông B, quận Bình Tân, TP.HCM</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-400">+1 (555) 123-4567</span>
+                <span className="text-gray-400">0333.938.014</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-400">info@elitestore.com</span>
+                <span className="text-gray-400">cskh@yapee.vn</span>
               </div>
             </div>
           </div>
@@ -85,3 +84,5 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+
+export default Footer;

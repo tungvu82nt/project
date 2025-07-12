@@ -256,7 +256,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
             <div className="bg-gray-50 px-6 py-4 border-t">
               <p className="text-xs text-gray-600 mb-2">Demo Credentials:</p>
               <div className="text-xs text-gray-500 space-y-1">
-                <p><strong>Admin:</strong> admin@elitestore.com / admin123</p>
+                <p><strong>Admin:</strong> admin@yapee.vn / admin123</p>
                 <p><strong>Customer:</strong> Any email / password (6+ chars)</p>
               </div>
             </div>

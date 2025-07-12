@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Package, 
@@ -14,26 +14,31 @@ import {
   FileText,
   Megaphone,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Tag
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
-import { LanguageSelector } from '../components/Layout/LanguageSelector';
+import LanguageSelector from '../components/Layout/LanguageSelector';
+import { NotificationSystem } from '../components/Notifications/NotificationSystem';
+import { NotificationProvider, useNotificationContext } from '../contexts/NotificationContext';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
-export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
+const AdminLayoutContent: React.FC<AdminLayoutProps> = ({ children }) => {
   const { t } = useLanguage();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { notifications, removeNotification } = useNotificationContext();
 
   const navigation = [
     { name: t('admin.dashboard'), href: '/admin', icon: LayoutDashboard },
     { name: t('admin.products'), href: '/admin/products', icon: Package },
+    { name: t('admin.categories'), href: '/admin/categories', icon: Tag },
     { name: t('admin.orders'), href: '/admin/orders', icon: ShoppingCart },
     { name: t('admin.customers'), href: '/admin/customers', icon: Users },
     { name: t('admin.analytics'), href: '/admin/analytics', icon: BarChart3 },
@@ -43,33 +48,27 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+  
+  const handleNavigation = (path: string) => {
+    setSidebarOpen(false);
+    navigate(path);
+  };
 
   return (
-    <div className={`h-screen flex ${darkMode ? 'dark' : ''}`}>
+    <div className={`h-screen flex overflow-hidden ${darkMode ? 'dark' : ''}`}>
       {/* Mobile sidebar overlay */}
-      <AnimatePresence>
-        {sidebarOpen && (
-          <motion.div
-            className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSidebarOpen(false)}
-          />
-        )}
-      </AnimatePresence>
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       {/* Sidebar */}
-      <motion.div
-        className={`fixed inset-y-0 left-0 z-50 bg-white dark:bg-gray-900 shadow-lg transform transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } ${sidebarCollapsed ? 'lg:w-16' : 'lg:w-64'} w-64`}
-        initial={false}
-        animate={{ 
-          width: sidebarCollapsed ? 64 : 256,
-          x: sidebarOpen ? 0 : -256 
-        }}
-        transition={{ duration: 0.3 }}
+      <div
+        className={`fixed inset-y-0 left-0 z-50 bg-white dark:bg-gray-900 shadow-lg lg:relative ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        } ${sidebarCollapsed ? 'lg:w-16' : 'lg:w-64'} w-64 transition-all duration-300`}
       >
         {/* Sidebar Header */}
         <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200 dark:border-gray-700">
@@ -110,22 +109,21 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
           {navigation.map((item) => {
             const Icon = item.icon;
             return (
-              <Link
+              <button
                 key={item.name}
-                to={item.href}
-                className={`flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-colors group ${
+                onClick={() => handleNavigation(item.href)}
+                className={`flex items-center w-full px-3 py-3 text-sm font-medium rounded-lg transition-colors group ${
                   isActive(item.href)
                     ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200'
                     : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'
                 }`}
-                onClick={() => setSidebarOpen(false)}
                 title={sidebarCollapsed ? item.name : undefined}
               >
                 <Icon className="h-5 w-5 flex-shrink-0" />
                 {!sidebarCollapsed && (
-                  <span className="ml-3 whitespace-nowrap">{item.name}</span>
+                  <span className="ml-3 whitespace-nowrap text-left">{item.name}</span>
                 )}
-              </Link>
+              </button>
             );
           })}
         </nav>
@@ -151,7 +149,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             )}
           </button>
         </div>
-      </motion.div>
+      </div>
 
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
@@ -197,6 +195,22 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
           </div>
         </main>
       </div>
+
+      {/* Notification System */}
+      <div className="fixed top-4 right-4 z-50">
+        <NotificationSystem 
+          notifications={notifications} 
+          onRemove={removeNotification} 
+        />
+      </div>
     </div>
+  );
+};
+
+export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
+  return (
+    <NotificationProvider>
+      <AdminLayoutContent>{children}</AdminLayoutContent>
+    </NotificationProvider>
   );
 };

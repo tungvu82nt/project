@@ -82,7 +82,7 @@ const DatabaseDemo: React.FC = () => {
           }
         ],
         shippingAddress: {
-          fullName: `${users[0].firstName} ${users[0].lastName}`,
+          fullName: users[0].firstName && users[0].lastName ? `${users[0].firstName} ${users[0].lastName}` : users[0].email,
           address: '123 Test Street',
           city: 'Test City',
           postalCode: '12345',
@@ -353,7 +353,7 @@ const DatabaseDemo: React.FC = () => {
                 {users.slice(0, 10).map((user) => (
                   <div key={user.id} className="p-4">
                     <h4 className="font-medium text-gray-900">
-                      {user.firstName} {user.lastName}
+                      {user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.email}
                     </h4>
                     <p className="text-sm text-gray-600">{user.email}</p>
                     <p className="text-xs text-gray-500 capitalize">{user.role}</p>

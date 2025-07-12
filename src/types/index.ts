@@ -1,3 +1,16 @@
+export interface Category {
+  id: string;
+  name: string;
+  description: string;
+  slug: string;
+  parentId?: string;
+  status: 'active' | 'inactive';
+  image?: string;
+  productCount?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -67,8 +80,37 @@ export interface Order {
 
 export interface User {
   id: string;
-  name: string;
+  firstName?: string;
+  lastName?: string;
   email: string;
   role: 'admin' | 'editor' | 'customer';
   avatar?: string;
+  phone?: string;
+  dateOfBirth?: string;
+  gender?: 'male' | 'female' | 'other';
+  isActive?: boolean;
+  isEmailVerified?: boolean;
+  preferences?: {
+    language: string;
+    currency: string;
+    notifications: {
+      email: boolean;
+      sms: boolean;
+      push: boolean;
+    };
+  };
+  addresses?: Array<{
+    id: string;
+    type: 'home' | 'work' | 'other';
+    fullName: string;
+    address: string;
+    city: string;
+    postalCode: string;
+    country: string;
+    phone: string;
+    isDefault: boolean;
+  }>;
+  createdAt?: string;
+  updatedAt?: string;
+  lastLoginAt?: string | null;
 }

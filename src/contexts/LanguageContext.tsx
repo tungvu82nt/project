@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { normalizeText, ensureDisplaySafe, fixVietnameseEncoding } from '../utils/encoding';
 
 export type Language = 'en' | 'vi' | 'zh';
 
@@ -21,7 +22,7 @@ export const useLanguage = () => {
   return context;
 };
 
-// Translation data - Hoàn chỉnh cho tất cả nội dung
+// Translation data - Complete for all content
 const translations = {
   en: {
     // Common
@@ -78,8 +79,8 @@ const translations = {
     'home.hero.subtitle': 'Experience the future of technology with our curated collection of premium electronics, designed to elevate your digital lifestyle.',
     'home.hero.shopNow': 'Shop Now',
     'home.hero.learnMore': 'Learn More',
-    'home.features.title': 'Why Choose EliteStore?',
-    'home.features.subtitle': 'We\'re committed to providing you with the best shopping experience and premium quality products.',
+    'home.features.title': 'Why Choose Yapee?',
+    'home.features.subtitle': 'We are committed to providing you with the best shopping experience and premium quality products.',
     'home.features.quality.title': 'Premium Quality',
     'home.features.quality.desc': 'Only the finest products from trusted brands make it to our collection.',
     'home.features.shipping.title': 'Fast Shipping',
@@ -229,7 +230,7 @@ const translations = {
     'auth.emailInvalid': 'Please enter a valid email address',
     'auth.passwordMismatch': 'Passwords do not match',
     'auth.demoCredentials': 'Demo Credentials:',
-    'auth.adminDemo': 'Admin: admin@elitestore.com / admin123',
+    'auth.adminDemo': 'Admin: admin@yapee.vn / admin123',
     'auth.customerDemo': 'Customer: Any email / password (6+ chars)',
 
     // Admin
@@ -264,6 +265,40 @@ const translations = {
     'admin.totalProducts': 'Total Products',
     'admin.totalCustomers': 'Total Customers',
 
+    // Category Management
+    'admin.categoryManagement': 'Category Management',
+    'admin.addCategory': 'Add Category',
+    'admin.editCategory': 'Edit Category',
+    'admin.deleteCategory': 'Delete Category',
+    'admin.categoryName': 'Category Name',
+    'admin.categoryDescription': 'Manage your store product categories',
+    'admin.allStatuses': 'All Statuses',
+    'admin.categoryStatus': 'Status',
+    'admin.categoryActions': 'Actions',
+    'admin.searchCategories': 'Search categories...',
+    'admin.filterByStatus': 'Filter by Status',
+    'admin.active': 'Active',
+    'admin.inactive': 'Inactive',
+    'admin.createCategory': 'Create Category',
+    'admin.updateCategory': 'Update Category',
+    'admin.confirmDeleteCategory': 'Are you sure you want to delete this category?',
+    'admin.categoryCreated': 'Category created successfully',
+    'admin.categoryUpdated': 'Category updated successfully',
+    'admin.categoryDeleted': 'Category deleted successfully',
+    'admin.noCategories': 'No categories found',
+    'admin.totalCategories': 'Total Categories',
+    'admin.viewDetails': 'View Details',
+    'admin.modalFormPlaceholder': 'Modal form will be implemented here',
+    'admin.noMatchingCategories': 'No categories match the current filters.',
+    'admin.createFirstCategory': 'Start by creating your first category.',
+    'admin.category': 'Category',
+    'admin.parentCategory': 'Parent Category',
+    'admin.productCount': 'Product Count',
+    'admin.status': 'Status',
+    'admin.lastUpdated': 'Last Updated',
+    'admin.actions': 'Actions',
+    'admin.tryDifferentFilters': 'Try changing filters or search to see other categories.',
+
     // Categories
     'categories.electronics': 'Electronics',
     'categories.wearables': 'Wearables',
@@ -296,7 +331,7 @@ const translations = {
     'footer.subscribe': 'Subscribe',
     'footer.enterEmail': 'Enter your email',
     'footer.allRightsReserved': 'All rights reserved',
-    'footer.copyright': '© 2024 EliteStore. All rights reserved.',
+    'footer.copyright': '© 2024 Yapee. All rights reserved.',
 
     // Testimonials
     'testimonials.title': 'What Our Customers Say',
@@ -391,7 +426,7 @@ const translations = {
     'home.hero.subtitle': 'Trải nghiệm tương lai của công nghệ với bộ sưu tập điện tử cao cấp được tuyển chọn, được thiết kế để nâng cao lối sống số của bạn.',
     'home.hero.shopNow': 'Mua Ngay',
     'home.hero.learnMore': 'Tìm Hiểu Thêm',
-    'home.features.title': 'Tại Sao Chọn EliteStore?',
+    'home.features.title': 'Tại Sao Chọn Yapee?',
     'home.features.subtitle': 'Chúng tôi cam kết mang đến cho bạn trải nghiệm mua sắm tốt nhất và các sản phẩm chất lượng cao cấp.',
     'home.features.quality.title': 'Chất Lượng Cao Cấp',
     'home.features.quality.desc': 'Chỉ những sản phẩm tốt nhất từ các thương hiệu uy tín mới có mặt trong bộ sưu tập của chúng tôi.',
@@ -542,7 +577,7 @@ const translations = {
     'auth.emailInvalid': 'Vui lòng nhập địa chỉ email hợp lệ',
     'auth.passwordMismatch': 'Mật khẩu không khớp',
     'auth.demoCredentials': 'Tài khoản demo:',
-    'auth.adminDemo': 'Quản trị: admin@elitestore.com / admin123',
+    'auth.adminDemo': 'Quản trị: admin@yapee.vn / admin123',
     'auth.customerDemo': 'Khách hàng: Email bất kỳ / mật khẩu (6+ ký tự)',
 
     // Admin
@@ -577,6 +612,40 @@ const translations = {
     'admin.totalProducts': 'Tổng sản phẩm',
     'admin.totalCustomers': 'Tổng khách hàng',
 
+    // Category Management
+    'admin.categoryManagement': 'Quản lý danh mục',
+    'admin.addCategory': 'Thêm danh mục',
+    'admin.editCategory': 'Chỉnh sửa danh mục',
+    'admin.deleteCategory': 'Xóa danh mục',
+    'admin.categoryName': 'Tên danh mục',
+    'admin.categoryDescription': 'Quản lý các danh mục sản phẩm của cửa hàng',
+    'admin.allStatuses': 'Tất cả trạng thái',
+    'admin.categoryStatus': 'Trạng thái',
+    'admin.categoryActions': 'Thao tác',
+    'admin.searchCategories': 'Tìm kiếm danh mục...',
+    'admin.filterByStatus': 'Lọc theo trạng thái',
+    'admin.active': 'Hoạt động',
+    'admin.inactive': 'Không hoạt động',
+    'admin.createCategory': 'Tạo danh mục',
+    'admin.updateCategory': 'Cập nhật danh mục',
+    'admin.confirmDeleteCategory': 'Bạn có chắc chắn muốn xóa danh mục này?',
+    'admin.categoryCreated': 'Tạo danh mục thành công',
+    'admin.categoryUpdated': 'Cập nhật danh mục thành công',
+    'admin.categoryDeleted': 'Xóa danh mục thành công',
+    'admin.noCategories': 'Không tìm thấy danh mục',
+    'admin.totalCategories': 'Tổng số danh mục',
+    'admin.viewDetails': 'Xem chi tiết',
+    'admin.modalFormPlaceholder': 'Modal form sẽ được implement ở đây',
+    'admin.noMatchingCategories': 'Không tìm thấy danh mục phù hợp với bộ lọc.',
+    'admin.createFirstCategory': 'Bắt đầu bằng cách tạo danh mục đầu tiên.',
+    'admin.category': 'Danh mục',
+    'admin.parentCategory': 'Danh mục cha',
+    'admin.productCount': 'Số sản phẩm',
+    'admin.status': 'Trạng thái',
+    'admin.lastUpdated': 'Cập nhật',
+    'admin.actions': 'Thao tác',
+    'admin.tryDifferentFilters': 'Thử thay đổi bộ lọc hoặc tìm kiếm để xem danh mục khác.',
+
     // Categories
     'categories.electronics': 'Điện tử',
     'categories.wearables': 'Thiết bị đeo',
@@ -609,7 +678,7 @@ const translations = {
     'footer.subscribe': 'Đăng ký',
     'footer.enterEmail': 'Nhập email của bạn',
     'footer.allRightsReserved': 'Tất cả quyền được bảo lưu',
-    'footer.copyright': '© 2024 EliteStore. Tất cả quyền được bảo lưu.',
+    'footer.copyright': '© 2024 Yapee. Tất cả quyền được bảo lưu.',
 
     // Testimonials
     'testimonials.title': 'Khách Hàng Nói Gì Về Chúng Tôi',
@@ -704,7 +773,7 @@ const translations = {
     'home.hero.subtitle': '通过我们精心挑选的高端电子产品系列体验技术的未来，旨在提升您的数字生活方式。',
     'home.hero.shopNow': '立即购买',
     'home.hero.learnMore': '了解更多',
-    'home.features.title': '为什么选择EliteStore？',
+    'home.features.title': '为什么选择Yapee？',
     'home.features.subtitle': '我们致力于为您提供最佳的购物体验和优质产品。',
     'home.features.quality.title': '优质品质',
     'home.features.quality.desc': '只有来自可信品牌的最优质产品才能进入我们的收藏。',
@@ -855,7 +924,7 @@ const translations = {
     'auth.emailInvalid': '请输入有效的邮箱地址',
     'auth.passwordMismatch': '密码不匹配',
     'auth.demoCredentials': '演示账户：',
-    'auth.adminDemo': '管理员：admin@elitestore.com / admin123',
+    'auth.adminDemo': '管理员：admin@yapee.vn / admin123',
     'auth.customerDemo': '客户：任意邮箱 / 密码（6+字符）',
 
     // Admin
@@ -922,7 +991,7 @@ const translations = {
     'footer.subscribe': '订阅',
     'footer.enterEmail': '输入您的邮箱',
     'footer.allRightsReserved': '保留所有权利',
-    'footer.copyright': '© 2024 EliteStore. 保留所有权利。',
+    'footer.copyright': '© 2024 Yapee. 保留所有权利。',
 
     // Testimonials
     'testimonials.title': '客户评价',
@@ -992,9 +1061,9 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     
     // Update page title based on language
     const titles = {
-      en: 'EliteStore - Premium Electronics & Technology',
-      vi: 'EliteStore - Điện tử & Công nghệ Cao cấp',
-      zh: 'EliteStore - 高端电子产品与技术'
+      en: 'Yapee - Premium Electronics & Technology',
+      vi: 'Yapee - Điện tử & Công nghệ Cao cấp',
+      zh: 'Yapee - 高端电子产品与技术'
     };
     document.title = titles[language];
   }, [language]);
@@ -1008,6 +1077,17 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         translation = translation.replace(`{${param}}`, String(value));
       });
     }
+    
+    // Apply encoding utilities to ensure proper display
+    translation = normalizeText(translation);
+    
+    // Fix Vietnamese encoding issues if current language is Vietnamese
+    if (language === 'vi') {
+      translation = fixVietnameseEncoding(translation);
+    }
+    
+    // Ensure display safety
+    translation = ensureDisplaySafe(translation);
     
     return translation;
   };

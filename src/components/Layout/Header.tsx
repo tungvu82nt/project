@@ -6,7 +6,8 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { UserMenu } from './UserMenu';
 import { LoginModal } from '../Auth/LoginModal';
-import { LanguageSelector } from './LanguageSelector';
+import LanguageSelector from './LanguageSelector';
+import { normalizeText, ensureDisplaySafe, fixVietnameseEncoding } from '../../utils/encoding';
 
 interface HeaderProps {
   cartItemCount: number;
@@ -15,10 +16,20 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ cartItemCount }) => {
   const location = useLocation();
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Handle search input with encoding safety
+  const handleSearchChange = (value: string) => {
+    let processedValue = normalizeText(value);
+    if (language === 'vi') {
+      processedValue = fixVietnameseEncoding(processedValue);
+    }
+    setSearchTerm(ensureDisplaySafe(processedValue));
+  };
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -43,9 +54,9 @@ export const Header: React.FC<HeaderProps> = ({ cartItemCount }) => {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">E</span>
+                <span className="text-white font-bold text-xl">Y</span>
               </div>
-              <span className="text-xl font-bold text-gray-900 hidden sm:block">EliteStore</span>
+              <span className="text-xl font-bold text-gray-900 hidden sm:block">Yapee</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -69,6 +80,8 @@ export const Header: React.FC<HeaderProps> = ({ cartItemCount }) => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <input
                   type="text"
+                  value={searchTerm}
+                  onChange={(e) => handleSearchChange(e.target.value)}
                   placeholder={t('products.searchPlaceholder')}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
@@ -146,6 +159,8 @@ export const Header: React.FC<HeaderProps> = ({ cartItemCount }) => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                   <input
                     type="text"
+                    value={searchTerm}
+                    onChange={(e) => handleSearchChange(e.target.value)}
                     placeholder={t('products.searchPlaceholder')}
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />

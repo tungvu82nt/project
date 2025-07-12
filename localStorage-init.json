@@ -1,0 +1,8 @@
+{
+  "db_users": "[{\"id\":1,\"email\":\"admin@yapee.vn\",\"password\":\"191ee6ac91907b3f6b8016b39925c6968926e04d0f9c61d40da7f568dd6ae6e7\",\"firstName\":\"Admin\",\"lastName\":\"User\",\"phone\":\"+1234567890\",\"role\":\"admin\",\"isActive\":true,\"isEmailVerified\":true,\"preferences\":{\"language\":\"en\",\"currency\":\"USD\",\"notifications\":{\"email\":true,\"sms\":false,\"push\":true}},\"addresses\":[],\"createdAt\":\"2025-07-10T19:27:27.297Z\",\"updatedAt\":\"2025-07-10T19:27:27.299Z\",\"lastLoginAt\":null}]",
+  "db_products": "[]",
+  "db_orders": "[]",
+  "db_categories": "[]",
+  "db_reviews": "[]",
+  "db_settings": "[]"
+}

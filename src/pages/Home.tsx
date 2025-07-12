@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Shield, Truck, Headphones, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { ProductCard } from '../components/Product/ProductCard';
+import { ProductCard } from '../components';
 import { NewsletterSection } from '../components/Newsletter/NewsletterSection';
 import { TestimonialsSection } from '../components/Testimonials/TestimonialsSection';
 import { products } from '../data/products';
@@ -84,7 +84,7 @@ export const Home: React.FC<HomeProps> = ({ onAddToCart }) => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Why Choose EliteStore?
+              Why Choose Yapee?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               We're committed to providing you with the best shopping experience and premium quality products.

@@ -27,7 +27,7 @@ class OrderService {
     this.db = new DatabaseService({
       host: 'localhost',
       port: 3306,
-      database: 'elitestore',
+      database: 'yapee',
       username: 'root',
       password: '',
       maxConnections: 10,

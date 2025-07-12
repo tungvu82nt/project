@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Search, Filter, Grid, List, SlidersHorizontal } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ProductCard } from '../components/Product/ProductCard';
+import { ProductCard } from '../components';
 import { products } from '../data/products';
 import { Product } from '../types';
 import { useLanguage } from '../contexts/LanguageContext';

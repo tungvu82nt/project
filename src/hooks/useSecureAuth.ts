@@ -181,7 +181,7 @@ export const useSecureAuth = (securitySettings: Partial<SecuritySettings> = {}) 
         user = {
           id: '1',
           name: 'Admin User',
-          email: 'admin@elitestore.com',
+          email: 'admin@yapee.vn',
           role: 'admin',
           lastLogin: Date.now(),
           twoFactorEnabled: settings.requireTwoFactor

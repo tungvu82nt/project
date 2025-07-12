@@ -23,6 +23,56 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      
+      // Import/Export consistency rules
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        { prefer: 'type-imports', disallowTypeAnnotations: false }
+      ],
+      '@typescript-eslint/consistent-type-exports': 'error',
+      
+      // Naming conventions
+      '@typescript-eslint/naming-convention': [
+        'error',
+        {
+          selector: 'interface',
+          format: ['PascalCase'],
+        },
+        {
+          selector: 'typeAlias',
+          format: ['PascalCase'],
+        },
+        {
+          selector: 'enum',
+          format: ['PascalCase'],
+        },
+        {
+          selector: 'variable',
+          format: ['camelCase', 'PascalCase', 'UPPER_CASE'],
+        },
+        {
+          selector: 'function',
+          format: ['camelCase', 'PascalCase'],
+        },
+      ],
+      
+      // Code quality rules
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
+      ],
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      
+      // React specific rules
+      'react-hooks/exhaustive-deps': 'warn',
+      
+      // General code style
+      'prefer-const': 'error',
+      'no-var': 'error',
+      'object-shorthand': 'error',
+      'prefer-template': 'error',
     },
   }
 );

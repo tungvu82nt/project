@@ -1,6 +1,7 @@
 import DatabaseService from './DatabaseService';
-import { User } from '../types';
+import { User } from '../types/user';
 import { localStorageService } from './LocalStorageService';
+import { normalizeText, ensureDisplaySafe, fixVietnameseEncoding } from '../utils/encoding';
 import { hashPassword, verifyPassword } from '../utils/security';
 
 export interface CreateUserData {
@@ -59,13 +60,64 @@ class UserService {
     this.db = new DatabaseService({
       host: 'localhost',
       port: 3306,
-      database: 'elitestore',
+      database: 'yapee',
       username: 'root',
       password: '',
       maxConnections: 10,
       enableQueryCache: true,
       enablePerformanceMonitoring: true
     });
+    
+    // Initialize default admin user (fire and forget)
+    this.initializeDefaultUsers().catch(error => {
+      console.error('Failed to initialize default users:', error);
+    });
+  }
+
+  // Initialize default users (admin account)
+  private async initializeDefaultUsers(): Promise<void> {
+    try {
+      const adminEmail = 'admin@elitestore.com';
+      const existingAdmin = await this.getUserByEmail(adminEmail);
+      
+      if (!existingAdmin) {
+        // Create default admin user
+        const hashedPassword = await hashPassword('admin123');
+        
+        const adminUser: Omit<User, 'id'> = {
+          email: adminEmail,
+          password: hashedPassword,
+          firstName: 'Admin',
+          lastName: 'User',
+          phone: '+1234567890',
+          role: 'admin',
+          isActive: true,
+          isEmailVerified: true,
+          preferences: {
+            language: 'en',
+            currency: 'USD',
+            notifications: {
+              email: true,
+              sms: false,
+              push: true
+            }
+          },
+          addresses: [],
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          lastLoginAt: null
+        };
+
+        await this.db.query(
+          `INSERT INTO ${this.TABLE_NAME}`,
+          [adminUser]
+        );
+        
+        console.log('Default admin user created successfully');
+      }
+    } catch (error) {
+      console.error('Error initializing default users:', error);
+    }
   }
 
   // Create new user (registration)
@@ -111,9 +163,9 @@ class UserService {
         [user]
       );
 
-      if (result.length > 0) {
+      if (result.rows.length > 0) {
         // Remove password from returned user
-        const { password, ...userWithoutPassword } = result[0];
+        const { password, ...userWithoutPassword } = result.rows[0];
         return userWithoutPassword as User;
       }
 
@@ -132,11 +184,17 @@ class UserService {
         [email]
       );
 
-      if (result.length === 0) {
+      if (result.rows.length === 0) {
         return null;
       }
 
-      const user = result[0];
+      const user = result.rows[0];
+      
+      // Check if user and password exist
+      if (!user || !user.password) {
+        console.error('User or password not found in database result');
+        return null;
+      }
       
       // Verify password
       const isValidPassword = await verifyPassword(password, user.password);
@@ -164,7 +222,8 @@ class UserService {
       );
       
       // Remove passwords from all users
-      return result.map(user => {
+      return result.rows.map(user => {
+        if (!user) return user;
         const { password, ...userWithoutPassword } = user;
         return userWithoutPassword as User;
       });
@@ -182,8 +241,8 @@ class UserService {
         [id]
       );
       
-      if (result.length > 0) {
-        const { password, ...userWithoutPassword } = result[0];
+      if (result.rows.length > 0 && result.rows[0]) {
+        const { password, ...userWithoutPassword } = result.rows[0];
         return userWithoutPassword as User;
       }
       
@@ -202,8 +261,8 @@ class UserService {
         [email]
       );
       
-      if (result.length > 0) {
-        const { password, ...userWithoutPassword } = result[0];
+      if (result.rows.length > 0 && result.rows[0]) {
+        const { password, ...userWithoutPassword } = result.rows[0];
         return userWithoutPassword as User;
       }
       
@@ -222,8 +281,8 @@ class UserService {
         [{ ...updates, updatedAt: new Date().toISOString() }, id]
       );
       
-      if (result.length > 0) {
-        const { password, ...userWithoutPassword } = result[0];
+      if (result.rows.length > 0 && result.rows[0]) {
+        const { password, ...userWithoutPassword } = result.rows[0];
         return userWithoutPassword as User;
       }
       
@@ -243,11 +302,17 @@ class UserService {
         [id]
       );
 
-      if (result.length === 0) {
+      if (result.rows.length === 0) {
         return false;
       }
 
-      const user = result[0];
+      const user = result.rows[0];
+      
+      // Check if user and password exist
+      if (!user || !user.password) {
+        console.error('User or password not found in database result');
+        return false;
+      }
       
       // Verify current password
       const isValidPassword = await verifyPassword(currentPassword, user.password);
@@ -264,7 +329,7 @@ class UserService {
         [{ password: hashedNewPassword, updatedAt: new Date().toISOString() }, id]
       );
 
-      return updateResult.length > 0;
+      return updateResult.rows.length > 0;
     } catch (error) {
       console.error('Error changing password:', error);
       throw error;
@@ -350,7 +415,8 @@ class UserService {
         [role]
       );
       
-      return result.map(user => {
+      return result.rows.map(user => {
+        if (!user) return user;
         const { password, ...userWithoutPassword } = user;
         return userWithoutPassword as User;
       });
@@ -364,14 +430,26 @@ class UserService {
   async searchUsers(query: string): Promise<User[]> {
     try {
       const allUsers = await this.getAllUsers();
-      const searchTerm = query.toLowerCase();
       
-      return allUsers.filter(user => 
-        user.firstName.toLowerCase().includes(searchTerm) ||
-        user.lastName.toLowerCase().includes(searchTerm) ||
-        user.email.toLowerCase().includes(searchTerm) ||
-        (user.phone && user.phone.includes(searchTerm))
-      );
+      // Normalize and fix encoding for search term
+      let normalizedQuery = normalizeText(query);
+      normalizedQuery = fixVietnameseEncoding(normalizedQuery);
+      const searchTerm = ensureDisplaySafe(normalizedQuery).toLowerCase();
+      
+      return allUsers.filter(user => {
+        // Helper function to safely process text for comparison
+        const processText = (text: string | undefined) => {
+          if (!text) return '';
+          let processed = normalizeText(text);
+          processed = fixVietnameseEncoding(processed);
+          return ensureDisplaySafe(processed).toLowerCase();
+        };
+        
+        return processText(user.firstName).includes(searchTerm) ||
+               processText(user.lastName).includes(searchTerm) ||
+               processText(user.email).includes(searchTerm) ||
+               processText(user.phone).includes(searchTerm);
+      });
     } catch (error) {
       console.error('Error searching users:', error);
       return [];
@@ -440,7 +518,8 @@ class UserService {
         `SELECT * FROM ${this.TABLE_NAME} ORDER BY createdAt DESC LIMIT ${limit}`
       );
       
-      return result.map(user => {
+      return result.rows.map(user => {
+        if (!user) return user;
         const { password, ...userWithoutPassword } = user;
         return userWithoutPassword as User;
       });

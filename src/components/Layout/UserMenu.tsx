@@ -18,11 +18,11 @@ export const UserMenu: React.FC = () => {
       >
         <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
           <span className="text-white font-medium text-sm">
-            {user.name.charAt(0).toUpperCase()}
+            {user.firstName?.charAt(0)?.toUpperCase() || user.email?.charAt(0)?.toUpperCase() || 'U'}
           </span>
         </div>
         <span className="hidden md:block text-sm font-medium text-gray-700">
-          {user.name}
+          {user.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : user.email}
         </span>
         <ChevronDown className="h-4 w-4 text-gray-500" />
       </button>
@@ -45,11 +45,13 @@ export const UserMenu: React.FC = () => {
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
                     <span className="text-white font-medium">
-                      {user.name.charAt(0).toUpperCase()}
+                      {user.firstName?.charAt(0)?.toUpperCase() || user.email?.charAt(0)?.toUpperCase() || 'U'}
                     </span>
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">{user.name}</p>
+                    <p className="font-medium text-gray-900">
+                      {user.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : user.email}
+                    </p>
                     <p className="text-sm text-gray-500">{user.email}</p>
                     <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
                       user.role === 'admin' 

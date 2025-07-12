@@ -1,8 +1,8 @@
-# 🛍️ EliteStore - 完整电商应用程序
+# 🛍️ Yapee - 完整电商应用程序
 
 <div align="center">
 
-![EliteStore Logo](https://via.placeholder.com/200x80/3B82F6/FFFFFF?text=EliteStore)
+![Yapee Logo](https://via.placeholder.com/200x80/3B82F6/FFFFFF?text=Yapee)
 
 **现代化全功能电商平台，具有3D产品可视化、全面管理系统和企业级安全性。**
 
@@ -125,8 +125,8 @@ src/
 #### **1分钟设置**
 ```bash
 # 克隆仓库
-git clone https://github.com/your-username/elitestore.git
-cd elitestore
+git clone https://github.com/your-username/yapee.git
+cd yapee
 
 # 安装依赖
 npm install
@@ -143,8 +143,8 @@ npm run dev
 
 1. **克隆仓库**
    ```bash
-   git clone https://github.com/your-username/elitestore.git
-   cd elitestore
+   git clone https://github.com/your-username/yapee.git
+   cd yapee
    ```
 
 2. **安装依赖**
@@ -421,7 +421,7 @@ function ProductCard() {
 
 1. **Fork仓库**
    ```bash
-   git fork https://github.com/your-username/elitestore.git
+   git fork https://github.com/your-username/yapee.git
    ```
 
 2. **创建功能分支**
@@ -449,7 +449,7 @@ function ProductCard() {
 
 **⭐ 如果您觉得有用，请为此仓库加星！**
 
-**由EliteStore团队用❤️制作**
+**由Yapee团队用❤️制作**
 
 **[English](README.md#english) | [Tiếng Việt](README.md#tiếng-việt) | [中文](#中文)**
 

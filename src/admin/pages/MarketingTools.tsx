@@ -83,6 +83,9 @@ export const MarketingTools: React.FC = () => {
   const [activeTab, setActiveTab] = useState('coupons');
   const [showCouponModal, setShowCouponModal] = useState(false);
   const [showCampaignModal, setShowCampaignModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [campaignForm, setCampaignForm] = useState({ name: '', type: 'email', description: '' });
+  const [couponForm, setCouponForm] = useState({ code: '', type: 'percentage', value: 0, minOrder: 0 });
 
   const marketingStats = [
     { label: 'Active Campaigns', value: campaigns.filter(c => c.status === 'active').length, color: 'blue', icon: TrendingUp },
@@ -99,6 +102,40 @@ export const MarketingTools: React.FC = () => {
       case 'paused': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
       case 'completed': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
       default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200';
+    }
+  };
+
+  const handleCreateCampaign = async () => {
+    try {
+      setIsLoading(true);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('Creating campaign:', campaignForm);
+      alert('Campaign created successfully!');
+      setShowCampaignModal(false);
+      setCampaignForm({ name: '', type: 'email', description: '' });
+    } catch (error) {
+      console.error('Error creating campaign:', error);
+      alert('Error creating campaign. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCreateCoupon = async () => {
+    try {
+      setIsLoading(true);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('Creating coupon:', couponForm);
+      alert('Coupon created successfully!');
+      setShowCouponModal(false);
+      setCouponForm({ code: '', type: 'percentage', value: 0, minOrder: 0 });
+    } catch (error) {
+      console.error('Error creating coupon:', error);
+      alert('Error creating coupon. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -184,11 +221,13 @@ export const MarketingTools: React.FC = () => {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Discount Coupons</h3>
                 <button
+                  data-testid="create-coupon-btn"
                   onClick={() => setShowCouponModal(true)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  disabled={isLoading}
+                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Plus className="h-4 w-4" />
-                  <span>Create Coupon</span>
+                  <span>{isLoading ? 'Loading...' : 'Create Coupon'}</span>
                 </button>
               </div>
 
@@ -268,11 +307,13 @@ export const MarketingTools: React.FC = () => {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Marketing Campaigns</h3>
                 <button
+                  data-testid="create-campaign-btn"
                   onClick={() => setShowCampaignModal(true)}
-                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  disabled={isLoading}
+                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Plus className="h-4 w-4" />
-                  <span>Create Campaign</span>
+                  <span>{isLoading ? 'Loading...' : 'Create Campaign'}</span>
                 </button>
               </div>
 
@@ -447,6 +488,167 @@ export const MarketingTools: React.FC = () => {
           )}
         </div>
       </motion.div>
+
+      {/* Campaign Modal */}
+      {showCampaignModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-900 rounded-lg p-6 w-full max-w-md mx-4">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Create New Campaign</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Campaign Name
+                </label>
+                <input
+                  data-testid="campaign-name-input"
+                  type="text"
+                  value={campaignForm.name}
+                  onChange={(e) => setCampaignForm({ ...campaignForm, name: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+                  placeholder="Enter campaign name"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Campaign Type
+                </label>
+                <select
+                  data-testid="campaign-type-select"
+                  value={campaignForm.type}
+                  onChange={(e) => setCampaignForm({ ...campaignForm, type: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+                >
+                  <option value="email">Email</option>
+                  <option value="banner">Banner</option>
+                  <option value="social">Social Media</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Description
+                </label>
+                <textarea
+                  data-testid="campaign-description-input"
+                  value={campaignForm.description}
+                  onChange={(e) => setCampaignForm({ ...campaignForm, description: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+                  rows={3}
+                  placeholder="Enter campaign description"
+                />
+              </div>
+            </div>
+            <div className="flex space-x-3 mt-6">
+              <button
+                data-testid="cancel-campaign-btn"
+                onClick={() => {
+                  setShowCampaignModal(false);
+                  setCampaignForm({ name: '', type: 'email', description: '' });
+                }}
+                disabled={isLoading}
+                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                data-testid="submit-campaign-btn"
+                onClick={handleCreateCampaign}
+                disabled={isLoading || !campaignForm.name.trim()}
+                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? 'Creating...' : 'Create Campaign'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Coupon Modal */}
+      {showCouponModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-900 rounded-lg p-6 w-full max-w-md mx-4">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Create New Coupon</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Coupon Code
+                </label>
+                <input
+                  data-testid="coupon-code-input"
+                  type="text"
+                  value={couponForm.code}
+                  onChange={(e) => setCouponForm({ ...couponForm, code: e.target.value.toUpperCase() })}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+                  placeholder="Enter coupon code"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Discount Type
+                </label>
+                <select
+                  data-testid="coupon-type-select"
+                  value={couponForm.type}
+                  onChange={(e) => setCouponForm({ ...couponForm, type: e.target.value as 'percentage' | 'fixed' })}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+                >
+                  <option value="percentage">Percentage</option>
+                  <option value="fixed">Fixed Amount</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Discount Value
+                </label>
+                <input
+                  data-testid="coupon-value-input"
+                  type="number"
+                  value={couponForm.value}
+                  onChange={(e) => setCouponForm({ ...couponForm, value: Number(e.target.value) })}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+                  placeholder={couponForm.type === 'percentage' ? 'Enter percentage (e.g., 10)' : 'Enter amount (e.g., 50)'}
+                  min="0"
+                  max={couponForm.type === 'percentage' ? '100' : undefined}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Minimum Order Amount
+                </label>
+                <input
+                  data-testid="coupon-min-order-input"
+                  type="number"
+                  value={couponForm.minOrder}
+                  onChange={(e) => setCouponForm({ ...couponForm, minOrder: Number(e.target.value) })}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+                  placeholder="Enter minimum order amount"
+                  min="0"
+                />
+              </div>
+            </div>
+            <div className="flex space-x-3 mt-6">
+              <button
+                data-testid="cancel-coupon-btn"
+                onClick={() => {
+                  setShowCouponModal(false);
+                  setCouponForm({ code: '', type: 'percentage', value: 0, minOrder: 0 });
+                }}
+                disabled={isLoading}
+                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                data-testid="submit-coupon-btn"
+                onClick={handleCreateCoupon}
+                disabled={isLoading || !couponForm.code.trim() || couponForm.value <= 0}
+                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? 'Creating...' : 'Create Coupon'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,0 +1,22 @@
+{
+  "testRun": {
+    "id": "test-run-1752318725523",
+    "timestamp": "2025-07-12T11:12:05.523Z",
+    "environment": "development",
+    "baseURL": "http://localhost:5175",
+    "browser": "multiple",
+    "platform": "win32"
+  },
+  "summary": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "duration": 0
+  },
+  "tests": [],
+  "errors": [],
+  "performance": {},
+  "screenshots": [],
+  "videos": []
+}

@@ -1,0 +1,29 @@
+{
+  "timeouts": {
+    "short": 5000,
+    "medium": 10000,
+    "long": 30000
+  },
+  "retries": {
+    "flaky": 3,
+    "stable": 1
+  },
+  "screenshots": {
+    "onFailure": true,
+    "onSuccess": false,
+    "fullPage": true
+  },
+  "videos": {
+    "onFailure": true,
+    "onSuccess": false
+  },
+  "performance": {
+    "maxLoadTime": 5000,
+    "maxInteractionTime": 2000
+  },
+  "accessibility": {
+    "checkContrast": true,
+    "checkKeyboard": true,
+    "checkScreenReader": true
+  }
+}

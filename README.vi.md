@@ -1,8 +1,8 @@
-# 🛍️ EliteStore - Ứng Dụng Thương Mại Điện Tử Hoàn Chỉnh
+# 🛍️ Yapee - Ứng Dụng Thương Mại Điện Tử Hoàn Chỉnh
 
 <div align="center">
 
-![EliteStore Logo](https://via.placeholder.com/200x80/3B82F6/FFFFFF?text=EliteStore)
+![Yapee Logo](https://via.placeholder.com/200x80/3B82F6/FFFFFF?text=Yapee)
 
 **Nền tảng thương mại điện tử hiện đại, đầy đủ tính năng với hiển thị sản phẩm 3D, hệ thống quản lý toàn diện và bảo mật cấp doanh nghiệp.**
 
@@ -125,8 +125,8 @@ src/
 #### **Thiết Lập 1 Phút**
 ```bash
 # Clone repository
-git clone https://github.com/your-username/elitestore.git
-cd elitestore
+git clone https://github.com/your-username/yapee.git
+cd yapee
 
 # Cài đặt dependencies
 npm install
@@ -143,8 +143,8 @@ npm run dev
 
 1. **Clone Repository**
    ```bash
-   git clone https://github.com/your-username/elitestore.git
-   cd elitestore
+   git clone https://github.com/your-username/yapee.git
+   cd yapee
    ```
 
 2. **Cài Đặt Dependencies**
@@ -421,7 +421,7 @@ Chúng tôi hoan nghênh sự đóng góp từ cộng đồng! Đây là cách b
 
 1. **Fork Repository**
    ```bash
-   git fork https://github.com/your-username/elitestore.git
+   git fork https://github.com/your-username/yapee.git
    ```
 
 2. **Tạo Feature Branch**
@@ -449,7 +449,7 @@ Dự án này được cấp phép theo Giấy phép MIT - xem file [LICENSE](LI
 
 **⭐ Star repository này nếu bạn thấy hữu ích!**
 
-**Được tạo với ❤️ bởi EliteStore Team**
+**Được tạo với ❤️ bởi Yapee Team**
 
 **[English](README.md#english) | [Tiếng Việt](#tiếng-việt) | [中文](README.zh.md#中文)**
 

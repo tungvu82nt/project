@@ -1,29 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { LanguageProvider } from './contexts/LanguageContext';
-import { Header } from './components/Layout/Header';
-import { Footer } from './components/Layout/Footer';
+import { initializeDefaultData } from './utils/initializeData';
+import {
+  Header,
+  Footer,
+  NotificationSystem,
+  useNotifications
+} from './components';
+import {
+  Home,
+  Products,
+  ProductDetail,
+  Cart,
+  Checkout,
+  About,
+  Contact
+} from './pages';
 import { AdminLayout } from './admin/AdminLayout';
-import { NotificationSystem, useNotifications } from './components/Notifications/NotificationSystem';
-import { Home } from './pages/Home';
-import { Products } from './pages/Products';
-import { ProductDetail } from './pages/ProductDetail';
-import { Cart } from './pages/Cart';
-import { Checkout } from './pages/Checkout';
 import { AdminDashboard } from './admin/pages/AdminDashboard';
 import { ProductManagement } from './admin/pages/ProductManagement';
+import { CategoryManagement } from './admin/pages/CategoryManagement';
 import { OrderManagement } from './admin/pages/OrderManagement';
 import { CustomerManagement } from './admin/pages/CustomerManagement';
 import { AnalyticsPage } from './admin/pages/AnalyticsPage';
 import { ContentManagement } from './admin/pages/ContentManagement';
 import { MarketingTools } from './admin/pages/MarketingTools';
 import { useCart } from './hooks/useCart';
-import DatabaseDemo from './components/DatabaseDemo';
 
 function App() {
   const { items, addItem, removeItem, updateQuantity, total, itemCount, clearCart } = useCart();
   const { notifications, addNotification, removeNotification } = useNotifications();
+
+  // Initialize default data on app startup
+  useEffect(() => {
+    initializeDefaultData();
+  }, []);
 
   const handleAddToCart = (product: any, quantity = 1, color?: string, size?: string) => {
     addItem(product, quantity, color, size);
@@ -59,6 +72,7 @@ function App() {
                   <Routes>
                     <Route index element={<AdminDashboard />} />
                     <Route path="products" element={<ProductManagement />} />
+                    <Route path="categories" element={<CategoryManagement />} />
                     <Route path="orders" element={<OrderManagement />} />
                     <Route path="customers" element={<CustomerManagement />} />
                     <Route path="analytics" element={<AnalyticsPage />} />
@@ -93,9 +107,8 @@ function App() {
                           onPlaceOrder={handlePlaceOrder}
                         />
                       } />
-                      <Route path="about" element={<div className="p-8 text-center">About Page</div>} />
-                      <Route path="contact" element={<div className="p-8 text-center">Contact Page</div>} />
-                      <Route path="database-demo" element={<DatabaseDemo />} />
+                      <Route path="about" element={<About />} />
+                      <Route path="contact" element={<Contact />} />
                     </Routes>
                   </main>
                   <Footer />

@@ -1,0 +1,1192 @@
+{
+  "config": {
+    "configFile": "D:\\1\\pro\\project\\tests\\playwright\\playwright.config.js",
+    "rootDir": "D:/1/pro/project/tests/playwright",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results.json"
+        }
+      ],
+      [
+        "list",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "D:/1/pro/project/tests/playwright/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/1/pro/project/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/1/pro/project/tests/playwright/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "D:/1/pro/project/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/1/pro/project/tests/playwright/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "D:/1/pro/project/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/1/pro/project/tests/playwright/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "Mobile Chrome",
+        "name": "Mobile Chrome",
+        "testDir": "D:/1/pro/project/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/1/pro/project/tests/playwright/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "Mobile Safari",
+        "name": "Mobile Safari",
+        "testDir": "D:/1/pro/project/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/1/pro/project/tests/playwright/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "Microsoft Edge",
+        "name": "Microsoft Edge",
+        "testDir": "D:/1/pro/project/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/1/pro/project/tests/playwright/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "Google Chrome",
+        "name": "Google Chrome",
+        "testDir": "D:/1/pro/project/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.53.2",
+    "workers": 4,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:5173",
+      "reuseExistingServer": true,
+      "cwd": "../../",
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "simple-console-test.spec.js",
+      "file": "simple-console-test.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Elite Store - Simple Console Test",
+          "file": "simple-console-test.spec.js",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Kiểm tra lỗi console khi load trang",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 15299,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== ĐANG LOAD TRANG CHỦ ===\n"
+                        },
+                        {
+                          "text": "Tiêu đề trang: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "\n=== CONSOLE MESSAGES ===\n"
+                        },
+                        {
+                          "text": "1. [DEBUG] [vite] connecting...\n"
+                        },
+                        {
+                          "text": "   Tại: http://localhost:5173/@vite/client:494\n"
+                        },
+                        {
+                          "text": "2. [DEBUG] [vite] connected.\n"
+                        },
+                        {
+                          "text": "   Tại: http://localhost:5173/@vite/client:613\n"
+                        },
+                        {
+                          "text": "\n=== PAGE ERRORS ===\n"
+                        },
+                        {
+                          "text": "1. The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== TỔNG KẾT ===\n"
+                        },
+                        {
+                          "text": "Console errors: 0\n"
+                        },
+                        {
+                          "text": "Page errors: 1\n"
+                        },
+                        {
+                          "text": "Total console messages: 2\n"
+                        },
+                        {
+                          "text": "\n❌ CÁC LỖI PHÁT HIỆN:\n"
+                        },
+                        {
+                          "text": "   - Page Error: The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:14:37.008Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                },
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 7949,
+                      "error": {
+                        "message": "Error: page.goto: NS_ERROR_CONNECTION_REFUSED\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/\", waiting until \"networkidle\"\u001b[22m\n",
+                        "stack": "Error: page.goto: NS_ERROR_CONNECTION_REFUSED\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/\", waiting until \"networkidle\"\u001b[22m\n\n    at D:\\1\\pro\\project\\tests\\playwright\\simple-console-test.spec.js:27:16",
+                        "location": {
+                          "file": "D:\\1\\pro\\project\\tests\\playwright\\simple-console-test.spec.js",
+                          "column": 16,
+                          "line": 27
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 25 |\u001b[39m     \u001b[90m// Load trang chủ\u001b[39m\n \u001b[90m 26 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m'\\n=== ĐANG LOAD TRANG CHỦ ==='\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 27 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'http://localhost:5173/'\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'networkidle'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 28 |\u001b[39m     \n \u001b[90m 29 |\u001b[39m     \u001b[90m// Đợi một chút để tất cả scripts load\u001b[39m\n \u001b[90m 30 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m3000\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\1\\pro\\project\\tests\\playwright\\simple-console-test.spec.js",
+                            "column": 16,
+                            "line": 27
+                          },
+                          "message": "Error: page.goto: NS_ERROR_CONNECTION_REFUSED\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/\", waiting until \"networkidle\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 25 |\u001b[39m     \u001b[90m// Load trang chủ\u001b[39m\n \u001b[90m 26 |\u001b[39m     console\u001b[33m.\u001b[39mlog(\u001b[32m'\\n=== ĐANG LOAD TRANG CHỦ ==='\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 27 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'http://localhost:5173/'\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m'networkidle'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 28 |\u001b[39m     \n \u001b[90m 29 |\u001b[39m     \u001b[90m// Đợi một chút để tất cả scripts load\u001b[39m\n \u001b[90m 30 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m3000\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at D:\\1\\pro\\project\\tests\\playwright\\simple-console-test.spec.js:27:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "\n=== ĐANG LOAD TRANG CHỦ ===\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:14:37.024Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\1\\pro\\project\\tests\\playwright\\test-results\\simple-console-test-Elite--b5aae--lỗi-console-khi-load-trang-firefox\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\1\\pro\\project\\tests\\playwright\\test-results\\simple-console-test-Elite--b5aae--lỗi-console-khi-load-trang-firefox\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\1\\pro\\project\\tests\\playwright\\test-results\\simple-console-test-Elite--b5aae--lỗi-console-khi-load-trang-firefox\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\1\\pro\\project\\tests\\playwright\\simple-console-test.spec.js",
+                        "column": 16,
+                        "line": 27
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                },
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 15626,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== ĐANG LOAD TRANG CHỦ ===\n"
+                        },
+                        {
+                          "text": "Tiêu đề trang: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "\n=== CONSOLE MESSAGES ===\n"
+                        },
+                        {
+                          "text": "1. [DEBUG] [vite] connecting...\n"
+                        },
+                        {
+                          "text": "   Tại: http://localhost:5173/@vite/client:494\n"
+                        },
+                        {
+                          "text": "2. [DEBUG] [vite] connected.\n"
+                        },
+                        {
+                          "text": "   Tại: http://localhost:5173/@vite/client:613\n"
+                        },
+                        {
+                          "text": "\n=== PAGE ERRORS ===\n"
+                        },
+                        {
+                          "text": "1. Importing binding name 'ProductCard' is not found.\n"
+                        },
+                        {
+                          "text": "\n=== TỔNG KẾT ===\n"
+                        },
+                        {
+                          "text": "Console errors: 0\n"
+                        },
+                        {
+                          "text": "Page errors: 1\n"
+                        },
+                        {
+                          "text": "Total console messages: 2\n"
+                        },
+                        {
+                          "text": "\n❌ CÁC LỖI PHÁT HIỆN:\n"
+                        },
+                        {
+                          "text": "   - Page Error: Importing binding name 'ProductCard' is not found.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:15:01.520Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                },
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 11864,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== ĐANG LOAD TRANG CHỦ ===\n"
+                        },
+                        {
+                          "text": "Tiêu đề trang: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "\n=== CONSOLE MESSAGES ===\n"
+                        },
+                        {
+                          "text": "1. [DEBUG] [vite] connecting...\n"
+                        },
+                        {
+                          "text": "   Tại: http://localhost:5173/@vite/client:494\n"
+                        },
+                        {
+                          "text": "2. [DEBUG] [vite] connected.\n"
+                        },
+                        {
+                          "text": "   Tại: http://localhost:5173/@vite/client:613\n"
+                        },
+                        {
+                          "text": "\n=== PAGE ERRORS ===\n"
+                        },
+                        {
+                          "text": "1. The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== TỔNG KẾT ===\n"
+                        },
+                        {
+                          "text": "Console errors: 0\n"
+                        },
+                        {
+                          "text": "Page errors: 1\n"
+                        },
+                        {
+                          "text": "Total console messages: 2\n"
+                        },
+                        {
+                          "text": "\n❌ CÁC LỖI PHÁT HIỆN:\n"
+                        },
+                        {
+                          "text": "   - Page Error: The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:15:16.467Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                },
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9024,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== ĐANG LOAD TRANG CHỦ ===\n"
+                        },
+                        {
+                          "text": "Tiêu đề trang: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "\n=== CONSOLE MESSAGES ===\n"
+                        },
+                        {
+                          "text": "1. [DEBUG] [vite] connecting...\n"
+                        },
+                        {
+                          "text": "   Tại: http://localhost:5173/@vite/client:494\n"
+                        },
+                        {
+                          "text": "2. [DEBUG] [vite] connected.\n"
+                        },
+                        {
+                          "text": "   Tại: http://localhost:5173/@vite/client:613\n"
+                        },
+                        {
+                          "text": "\n=== PAGE ERRORS ===\n"
+                        },
+                        {
+                          "text": "1. Importing binding name 'ProductCard' is not found.\n"
+                        },
+                        {
+                          "text": "\n=== TỔNG KẾT ===\n"
+                        },
+                        {
+                          "text": "Console errors: 0\n"
+                        },
+                        {
+                          "text": "Page errors: 1\n"
+                        },
+                        {
+                          "text": "Total console messages: 2\n"
+                        },
+                        {
+                          "text": "\n❌ CÁC LỖI PHÁT HIỆN:\n"
+                        },
+                        {
+                          "text": "   - Page Error: Importing binding name 'ProductCard' is not found.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:15:24.734Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                },
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 16014,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== ĐANG LOAD TRANG CHỦ ===\n"
+                        },
+                        {
+                          "text": "Tiêu đề trang: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "\n=== CONSOLE MESSAGES ===\n"
+                        },
+                        {
+                          "text": "1. [DEBUG] [vite] connecting...\n"
+                        },
+                        {
+                          "text": "   Tại: http://localhost:5173/@vite/client:494\n"
+                        },
+                        {
+                          "text": "2. [DEBUG] [vite] connected.\n"
+                        },
+                        {
+                          "text": "   Tại: http://localhost:5173/@vite/client:613\n"
+                        },
+                        {
+                          "text": "\n=== PAGE ERRORS ===\n"
+                        },
+                        {
+                          "text": "1. The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== TỔNG KẾT ===\n"
+                        },
+                        {
+                          "text": "Console errors: 0\n"
+                        },
+                        {
+                          "text": "Page errors: 1\n"
+                        },
+                        {
+                          "text": "Total console messages: 2\n"
+                        },
+                        {
+                          "text": "\n❌ CÁC LỖI PHÁT HIỆN:\n"
+                        },
+                        {
+                          "text": "   - Page Error: The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:15:38.077Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                },
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Google Chrome",
+                  "projectName": "Google Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 11139,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== ĐANG LOAD TRANG CHỦ ===\n"
+                        },
+                        {
+                          "text": "Tiêu đề trang: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "\n=== CONSOLE MESSAGES ===\n"
+                        },
+                        {
+                          "text": "1. [DEBUG] [vite] connecting...\n"
+                        },
+                        {
+                          "text": "   Tại: http://localhost:5173/@vite/client:494\n"
+                        },
+                        {
+                          "text": "2. [DEBUG] [vite] connected.\n"
+                        },
+                        {
+                          "text": "   Tại: http://localhost:5173/@vite/client:613\n"
+                        },
+                        {
+                          "text": "\n=== PAGE ERRORS ===\n"
+                        },
+                        {
+                          "text": "1. The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== TỔNG KẾT ===\n"
+                        },
+                        {
+                          "text": "Console errors: 0\n"
+                        },
+                        {
+                          "text": "Page errors: 1\n"
+                        },
+                        {
+                          "text": "Total console messages: 2\n"
+                        },
+                        {
+                          "text": "\n❌ CÁC LỖI PHÁT HIỆN:\n"
+                        },
+                        {
+                          "text": "   - Page Error: The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:15:56.797Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c117aa8f7150daa00c5b-dcac49927e2220ea957e",
+              "file": "simple-console-test.spec.js",
+              "line": 4,
+              "column": 3
+            },
+            {
+              "title": "Kiểm tra các trang khác",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 23568,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Sản phẩm ===\n"
+                        },
+                        {
+                          "text": "✅ Sản phẩm - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Sản phẩm:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Giỏ hàng ===\n"
+                        },
+                        {
+                          "text": "✅ Giỏ hàng - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Giỏ hàng:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Liên hệ ===\n"
+                        },
+                        {
+                          "text": "✅ Liên hệ - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Liên hệ:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Về chúng tôi ===\n"
+                        },
+                        {
+                          "text": "✅ Về chúng tôi - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Về chúng tôi:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:14:37.000Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                },
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "timedOut",
+                      "duration": 34528,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Sản phẩm ===\n"
+                        },
+                        {
+                          "text": "❌ Không thể load trang Sản phẩm: page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/products\", waiting until \"networkidle\"\u001b[22m\n\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Giỏ hàng ===\n"
+                        },
+                        {
+                          "text": "❌ Không thể load trang Giỏ hàng: page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/cart\", waiting until \"networkidle\"\u001b[22m\n\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Liên hệ ===\n"
+                        },
+                        {
+                          "text": "❌ Không thể load trang Liên hệ: page.goto: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/contact\", waiting until \"networkidle\"\u001b[22m\n\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Về chúng tôi ===\n"
+                        },
+                        {
+                          "text": "❌ Không thể load trang Về chúng tôi: page.goto: Target page, context or browser has been closed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:14:37.085Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\1\\pro\\project\\tests\\playwright\\test-results\\simple-console-test-Elite--b1403-est-Kiểm-tra-các-trang-khác-firefox\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\1\\pro\\project\\tests\\playwright\\test-results\\simple-console-test-Elite--b1403-est-Kiểm-tra-các-trang-khác-firefox\\video.webm"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                },
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 2,
+                      "status": "timedOut",
+                      "duration": 30557,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Sản phẩm ===\n"
+                        },
+                        {
+                          "text": "✅ Sản phẩm - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Sản phẩm:\n"
+                        },
+                        {
+                          "text": "   - Importing binding name 'ProductCard' is not found.\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Giỏ hàng ===\n"
+                        },
+                        {
+                          "text": "✅ Giỏ hàng - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Giỏ hàng:\n"
+                        },
+                        {
+                          "text": "   - Importing binding name 'ProductCard' is not found.\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Liên hệ ===\n"
+                        },
+                        {
+                          "text": "✅ Liên hệ - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Liên hệ:\n"
+                        },
+                        {
+                          "text": "   - Importing binding name 'ProductCard' is not found.\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Về chúng tôi ===\n"
+                        },
+                        {
+                          "text": "❌ Không thể load trang Về chúng tôi: page.waitForTimeout: Test timeout of 30000ms exceeded.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:15:00.507Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\1\\pro\\project\\tests\\playwright\\test-results\\simple-console-test-Elite--b1403-est-Kiểm-tra-các-trang-khác-webkit\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\1\\pro\\project\\tests\\playwright\\test-results\\simple-console-test-Elite--b1403-est-Kiểm-tra-các-trang-khác-webkit\\video.webm"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                },
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 22106,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Sản phẩm ===\n"
+                        },
+                        {
+                          "text": "✅ Sản phẩm - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Sản phẩm:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Giỏ hàng ===\n"
+                        },
+                        {
+                          "text": "✅ Giỏ hàng - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Giỏ hàng:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Liên hệ ===\n"
+                        },
+                        {
+                          "text": "✅ Liên hệ - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Liên hệ:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Về chúng tôi ===\n"
+                        },
+                        {
+                          "text": "✅ Về chúng tôi - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Về chúng tôi:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:15:23.345Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                },
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 29649,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Sản phẩm ===\n"
+                        },
+                        {
+                          "text": "✅ Sản phẩm - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Sản phẩm:\n"
+                        },
+                        {
+                          "text": "   - Importing binding name 'ProductCard' is not found.\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Giỏ hàng ===\n"
+                        },
+                        {
+                          "text": "❌ Không thể load trang Giỏ hàng: page.goto: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/cart\", waiting until \"networkidle\"\u001b[22m\n\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Liên hệ ===\n"
+                        },
+                        {
+                          "text": "✅ Liên hệ - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Về chúng tôi ===\n"
+                        },
+                        {
+                          "text": "✅ Về chúng tôi - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:15:32.198Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                },
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Microsoft Edge",
+                  "projectName": "Microsoft Edge",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 25409,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Sản phẩm ===\n"
+                        },
+                        {
+                          "text": "✅ Sản phẩm - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Sản phẩm:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Giỏ hàng ===\n"
+                        },
+                        {
+                          "text": "✅ Giỏ hàng - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Giỏ hàng:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Liên hệ ===\n"
+                        },
+                        {
+                          "text": "✅ Liên hệ - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Liên hệ:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Về chúng tôi ===\n"
+                        },
+                        {
+                          "text": "✅ Về chúng tôi - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Về chúng tôi:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:15:40.069Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                },
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Google Chrome",
+                  "projectName": "Google Chrome",
+                  "results": [
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 16758,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Sản phẩm ===\n"
+                        },
+                        {
+                          "text": "✅ Sản phẩm - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Sản phẩm:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Giỏ hàng ===\n"
+                        },
+                        {
+                          "text": "✅ Giỏ hàng - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Giỏ hàng:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Liên hệ ===\n"
+                        },
+                        {
+                          "text": "✅ Liên hệ - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Liên hệ:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        },
+                        {
+                          "text": "\n=== KIỂM TRA TRANG: Về chúng tôi ===\n"
+                        },
+                        {
+                          "text": "✅ Về chúng tôi - Tiêu đề: Complete E-commerce Application with 3D Product Display\n"
+                        },
+                        {
+                          "text": "❌ Lỗi trên trang Về chúng tôi:\n"
+                        },
+                        {
+                          "text": "   - The requested module '/src/components/Product/ProductCard.tsx' does not provide an export named 'ProductCard'\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-07-09T13:16:03.328Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c117aa8f7150daa00c5b-de00050a8f0fe1fbee12",
+              "file": "simple-console-test.spec.js",
+              "line": 82,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-07-09T13:14:34.080Z",
+    "duration": 107237.091,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

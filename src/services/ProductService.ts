@@ -1,5 +1,6 @@
 import DatabaseService from './DatabaseService';
-import { Product } from '../types';
+import { Product } from '../types/product';
+import { normalizeText, ensureDisplaySafe, fixVietnameseEncoding } from '../utils/encoding';
 import { localStorageService } from './LocalStorageService';
 import { products as mockProducts } from '../data/products';
 
@@ -11,7 +12,7 @@ class ProductService {
     this.db = new DatabaseService({
       host: 'localhost',
       port: 3306,
-      database: 'elitestore',
+      database: 'yapee',
       username: 'root',
       password: '',
       maxConnections: 10,
@@ -76,21 +77,32 @@ class ProductService {
     }
   }
 
-  // Search products
+  // Search products with encoding safety
   async searchProducts(query: string): Promise<Product[]> {
     try {
       const allProducts = await this.getAllProducts();
-      const searchTerm = query.toLowerCase();
       
-      return allProducts.filter(product => 
-        product.name.en.toLowerCase().includes(searchTerm) ||
-        product.name.vi.toLowerCase().includes(searchTerm) ||
-        product.name.zh.toLowerCase().includes(searchTerm) ||
-        product.description.en.toLowerCase().includes(searchTerm) ||
-        product.description.vi.toLowerCase().includes(searchTerm) ||
-        product.description.zh.toLowerCase().includes(searchTerm) ||
-        product.category.toLowerCase().includes(searchTerm)
-      );
+      // Normalize and fix encoding for search term
+      let normalizedQuery = normalizeText(query);
+      normalizedQuery = fixVietnameseEncoding(normalizedQuery);
+      const searchTerm = ensureDisplaySafe(normalizedQuery).toLowerCase();
+      
+      return allProducts.filter(product => {
+        // Helper function to safely process text for comparison
+        const processText = (text: string) => {
+          let processed = normalizeText(text);
+          processed = fixVietnameseEncoding(processed);
+          return ensureDisplaySafe(processed).toLowerCase();
+        };
+        
+        return processText(product.name.en).includes(searchTerm) ||
+               processText(product.name.vi).includes(searchTerm) ||
+               processText(product.name.zh).includes(searchTerm) ||
+               processText(product.description.en).includes(searchTerm) ||
+               processText(product.description.vi).includes(searchTerm) ||
+               processText(product.description.zh).includes(searchTerm) ||
+               processText(product.category).includes(searchTerm);
+      });
     } catch (error) {
       console.error('Error searching products:', error);
       return [];

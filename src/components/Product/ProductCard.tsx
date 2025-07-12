@@ -4,6 +4,7 @@ import { Star, ShoppingCart, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Product } from '../../types';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { normalizeText, ensureDisplaySafe, fixVietnameseEncoding } from '../../utils/encoding';
 
 interface ProductCardProps {
   product: Product;
@@ -17,13 +18,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }
     ? Math.round((1 - product.price / product.originalPrice) * 100) 
     : 0;
 
-  // Get localized product data
+  // Get localized product data with encoding safety
   const getLocalizedName = () => {
-    return product.nameTranslations?.[language] || product.name;
+    let name = product.nameTranslations?.[language] || product.name;
+    name = normalizeText(name);
+    if (language === 'vi') {
+      name = fixVietnameseEncoding(name);
+    }
+    return ensureDisplaySafe(name);
   };
 
   const getLocalizedDescription = () => {
-    return product.descriptionTranslations?.[language] || product.description;
+    let description = product.descriptionTranslations?.[language] || product.description;
+    description = normalizeText(description);
+    if (language === 'vi') {
+      description = fixVietnameseEncoding(description);
+    }
+    return ensureDisplaySafe(description);
   };
 
   return (

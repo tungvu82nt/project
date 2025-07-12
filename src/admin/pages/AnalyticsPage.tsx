@@ -41,6 +41,51 @@ const customerSegments = [
 export const AnalyticsPage: React.FC = () => {
   const [dateRange, setDateRange] = useState('12months');
   const [selectedMetric, setSelectedMetric] = useState('revenue');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleDateRangeChange = async (newRange: string) => {
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setDateRange(newRange);
+      console.log(`Date range changed to: ${newRange}`);
+    } catch (error) {
+      console.error('Error changing date range:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleMetricChange = async (newMetric: string) => {
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 300));
+      setSelectedMetric(newMetric);
+      console.log(`Metric changed to: ${newMetric}`);
+    } catch (error) {
+      console.error('Error changing metric:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleExportReport = async () => {
+    setIsExporting(true);
+    try {
+      // Simulate export process
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log('Report exported successfully');
+      alert('Report exported successfully!');
+    } catch (error) {
+      console.error('Error exporting report:', error);
+      alert('Failed to export report. Please try again.');
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   const stats = [
     {
@@ -93,9 +138,11 @@ export const AnalyticsPage: React.FC = () => {
         
         <div className="flex items-center space-x-3">
           <select
+            data-testid="date-range-select"
             value={dateRange}
-            onChange={(e) => setDateRange(e.target.value)}
-            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white"
+            onChange={(e) => handleDateRangeChange(e.target.value)}
+            disabled={isLoading}
+            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <option value="7days">Last 7 Days</option>
             <option value="30days">Last 30 Days</option>
@@ -103,9 +150,14 @@ export const AnalyticsPage: React.FC = () => {
             <option value="12months">Last 12 Months</option>
           </select>
           
-          <button className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <button 
+            data-testid="export-report-btn"
+            onClick={handleExportReport}
+            disabled={isExporting}
+            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             <Download className="h-4 w-4" />
-            <span>Export Report</span>
+            <span>{isExporting ? 'Exporting...' : 'Export Report'}</span>
           </button>
         </div>
       </motion.div>
@@ -161,9 +213,11 @@ export const AnalyticsPage: React.FC = () => {
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Revenue Trend</h3>
             <select
+              data-testid="metric-select"
               value={selectedMetric}
-              onChange={(e) => setSelectedMetric(e.target.value)}
-              className="text-sm border border-gray-300 dark:border-gray-600 rounded px-2 py-1 dark:bg-gray-800 dark:text-white"
+              onChange={(e) => handleMetricChange(e.target.value)}
+              disabled={isLoading}
+              className="text-sm border border-gray-300 dark:border-gray-600 rounded px-2 py-1 dark:bg-gray-800 dark:text-white transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <option value="revenue">Revenue</option>
               <option value="orders">Orders</option>

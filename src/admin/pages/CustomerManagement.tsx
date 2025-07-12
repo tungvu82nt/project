@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Search, Filter, Eye, Mail, Phone, MapPin, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useNotificationContext } from '../../contexts/NotificationContext';
 
 // Mock customer data
 const customers = [
@@ -8,7 +9,7 @@ const customers = [
     id: '1',
     name: 'John Smith',
     email: 'john@example.com',
-    phone: '+1 (555) 123-4567',
+    phone: '0333.938.014',
     address: '123 Main St, New York, NY 10001',
     joinDate: '2024-01-15',
     totalOrders: 5,
@@ -42,6 +43,8 @@ const customers = [
 export const CustomerManagement: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('All');
+  const [isLoading, setIsLoading] = useState(false);
+  const { addNotification } = useNotificationContext();
 
   const statusOptions = ['All', 'active', 'vip', 'inactive'];
 
@@ -58,6 +61,82 @@ export const CustomerManagement: React.FC = () => {
       case 'vip': return 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200';
       case 'inactive': return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200';
       default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200';
+    }
+  };
+
+  // Handle view customer details
+  const handleViewCustomer = async (customerId: string) => {
+    setIsLoading(true);
+    try {
+      // Show loading notification
+      addNotification({
+        type: 'info',
+        title: 'Loading Customer Details',
+        message: `Fetching details for customer ${customerId}...`,
+        duration: 2000
+      });
+
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // In a real app, this would navigate to customer details page or open a modal
+      addNotification({
+        type: 'success',
+        title: 'Customer Details',
+        message: `Customer ${customerId} details loaded successfully`,
+        duration: 3000
+      });
+
+      console.log(`Viewing customer details for: ${customerId}`);
+    } catch (error) {
+      console.error('Failed to load customer details:', error);
+      
+      addNotification({
+        type: 'error',
+        title: 'Load Failed',
+        message: `Failed to load details for customer ${customerId}. Please try again.`,
+        duration: 5000
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handle send email to customer
+  const handleEmailCustomer = async (customerId: string, customerEmail: string) => {
+    setIsLoading(true);
+    try {
+      // Show loading notification
+      addNotification({
+        type: 'info',
+        title: 'Preparing Email',
+        message: `Opening email composer for ${customerEmail}...`,
+        duration: 2000
+      });
+
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // In a real app, this would open email composer or send email
+      addNotification({
+        type: 'success',
+        title: 'Email Ready',
+        message: `Email composer opened for ${customerEmail}`,
+        duration: 3000
+      });
+
+      console.log(`Sending email to customer: ${customerId} (${customerEmail})`);
+    } catch (error) {
+      console.error('Failed to prepare email:', error);
+      
+      addNotification({
+        type: 'error',
+        title: 'Email Failed',
+        message: `Failed to prepare email for ${customerEmail}. Please try again.`,
+        duration: 5000
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -217,10 +296,22 @@ export const CustomerManagement: React.FC = () => {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center space-x-2">
-                      <button className="p-1 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900 rounded">
+                      <button 
+                        data-testid={`view-customer-${customer.id}`}
+                        title={`View details for ${customer.name}`}
+                        onClick={() => handleViewCustomer(customer.id)}
+                        disabled={isLoading}
+                        className="p-1 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
                         <Eye className="h-4 w-4" />
                       </button>
-                      <button className="p-1 text-green-600 hover:bg-green-100 dark:hover:bg-green-900 rounded">
+                      <button 
+                        data-testid={`email-customer-${customer.id}`}
+                        title={`Send email to ${customer.email}`}
+                        onClick={() => handleEmailCustomer(customer.id, customer.email)}
+                        disabled={isLoading}
+                        className="p-1 text-green-600 hover:bg-green-100 dark:hover:bg-green-900 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
                         <Mail className="h-4 w-4" />
                       </button>
                     </div>

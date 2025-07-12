@@ -3,6 +3,8 @@ import { User } from '../types';
 import { localStorageService } from '../services/LocalStorageService';
 import { userService, CreateUserData } from '../services/UserService';
 
+/* eslint-disable react-refresh/only-export-components */
+
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;

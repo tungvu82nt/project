@@ -2,14 +2,19 @@ import React, { useState } from 'react';
 import { Search, Filter, Eye, Truck, CheckCircle, XCircle, Clock, Package } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { orders } from '../../data/orders';
+import { OrderService } from '../../services/OrderService';
+import { useNotificationContext } from '../../contexts/NotificationContext';
 
 export const OrderManagement: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('All');
+  const [ordersData, setOrdersData] = useState(orders);
+  const [isUpdating, setIsUpdating] = useState<string | null>(null);
+  const { addNotification } = useNotificationContext();
 
   const statusOptions = ['All', 'pending', 'processing', 'shipped', 'delivered', 'cancelled'];
 
-  const filteredOrders = orders.filter(order => {
+  const filteredOrders = ordersData.filter(order => {
     const matchesSearch = order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          order.customerName.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = selectedStatus === 'All' || order.status === selectedStatus;
@@ -38,11 +43,92 @@ export const OrderManagement: React.FC = () => {
     }
   };
 
+  // Handle order status update
+  const handleStatusUpdate = async (orderId: string, newStatus: string) => {
+    setIsUpdating(orderId);
+    try {
+      // For demo data, we'll just update the local state
+      // In production, we would call the API
+      if (process.env.NODE_ENV === 'production') {
+        // Call API to update order status
+        await OrderService.updateOrderStatus(orderId, newStatus);
+      } else {
+        // Simulate API call delay for demo
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+      
+      // Update local state
+      setOrdersData(prevOrders => 
+        prevOrders.map(order => 
+          order.id === orderId 
+            ? { ...order, status: newStatus }
+            : order
+        )
+      );
+      
+      // Show success notification
+      addNotification({
+        type: 'success',
+        title: 'Order Updated',
+        message: `Order ${orderId} status has been updated to ${newStatus.charAt(0).toUpperCase() + newStatus.slice(1)}`,
+        duration: 3000
+      });
+    } catch (error) {
+      console.error('Failed to update order status:', error);
+      
+      // Show error notification
+      addNotification({
+        type: 'error',
+        title: 'Update Failed',
+        message: `Failed to update order ${orderId}. Please try again.`,
+        duration: 5000
+      });
+    } finally {
+      setIsUpdating(null);
+    }
+  };
+
+  // Handle view order details
+  const handleViewOrder = async (orderId: string) => {
+    try {
+      // Show loading notification
+      addNotification({
+        type: 'info',
+        title: 'Loading Order Details',
+        message: `Fetching details for order ${orderId}...`,
+        duration: 2000
+      });
+
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // In a real app, this would navigate to order details page or open a modal
+      // For demo, we'll just show a success notification
+      addNotification({
+        type: 'success',
+        title: 'Order Details',
+        message: `Order ${orderId} details loaded successfully`,
+        duration: 3000
+      });
+
+      console.log(`Viewing order details for: ${orderId}`);
+    } catch (error) {
+      console.error('Failed to load order details:', error);
+      
+      addNotification({
+        type: 'error',
+        title: 'Load Failed',
+        message: `Failed to load details for order ${orderId}. Please try again.`,
+        duration: 5000
+      });
+    }
+  };
+
   const orderStats = [
-    { label: 'Total Orders', value: orders.length, color: 'blue' },
-    { label: 'Pending', value: orders.filter(o => o.status === 'pending').length, color: 'yellow' },
-    { label: 'Processing', value: orders.filter(o => o.status === 'processing').length, color: 'blue' },
-    { label: 'Delivered', value: orders.filter(o => o.status === 'delivered').length, color: 'green' }
+    { label: 'Total Orders', value: ordersData.length, color: 'blue' },
+    { label: 'Pending', value: ordersData.filter(o => o.status === 'pending').length, color: 'yellow' },
+    { label: 'Processing', value: ordersData.filter(o => o.status === 'processing').length, color: 'blue' },
+    { label: 'Delivered', value: ordersData.filter(o => o.status === 'delivered').length, color: 'green' }
   ];
 
   return (
@@ -169,12 +255,20 @@ export const OrderManagement: React.FC = () => {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center space-x-2">
-                      <button className="p-1 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900 rounded">
+                      <button 
+                        data-testid={`view-order-${order.id}`}
+                        title={`View details for order ${order.id}`}
+                        onClick={() => handleViewOrder(order.id)}
+                        disabled={isUpdating === order.id}
+                        className="p-1 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
                         <Eye className="h-4 w-4" />
                       </button>
                       <select 
-                        className="text-xs border border-gray-300 dark:border-gray-600 rounded px-2 py-1 dark:bg-gray-800 dark:text-white"
-                        defaultValue={order.status}
+                        className="text-xs border border-gray-300 dark:border-gray-600 rounded px-2 py-1 dark:bg-gray-800 dark:text-white disabled:opacity-50"
+                        value={order.status}
+                        onChange={(e) => handleStatusUpdate(order.id, e.target.value)}
+                        disabled={isUpdating === order.id}
                       >
                         <option value="pending">Pending</option>
                         <option value="processing">Processing</option>
@@ -194,7 +288,7 @@ export const OrderManagement: React.FC = () => {
         <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
             <div className="text-sm text-gray-700 dark:text-gray-300">
-              Showing {filteredOrders.length} of {orders.length} orders
+              Showing {filteredOrders.length} of {ordersData.length} orders
             </div>
             <div className="flex space-x-2">
               <button className="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">

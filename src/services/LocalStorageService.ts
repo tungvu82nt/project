@@ -2,7 +2,7 @@
 import { encryptData, decryptData } from '../utils/security';
 
 /**
- * Interface định nghĩa cấu trúc dữ liệu localStorage
+ * Interface defining localStorage data structure
  */
 interface StorageData {
   user?: any;
@@ -19,7 +19,7 @@ interface StorageData {
 }
 
 /**
- * Cấu hình cho từng loại dữ liệu
+ * Configuration for each data type
  */
 interface StorageConfig {
   encrypt?: boolean;
@@ -28,13 +28,13 @@ interface StorageConfig {
 }
 
 /**
- * Service quản lý localStorage tập trung
+ * Centralized localStorage management service
  */
 class LocalStorageService {
   private static instance: LocalStorageService;
-  private readonly prefix = 'elitestore_';
+  private readonly prefix = 'yapee_';
   
-  // Cấu hình mặc định cho từng loại dữ liệu
+  // Default configuration for each data type
   private readonly defaultConfigs: Record<keyof StorageData, StorageConfig> = {
     user: { encrypt: true, expiry: 24 * 60 * 60 * 1000 }, // 24 hours
     cart: { encrypt: false, expiry: 7 * 24 * 60 * 60 * 1000 }, // 7 days
@@ -54,8 +54,8 @@ class LocalStorageService {
   }
 
   /**
- * Singleton pattern - lấy instance duy nhất
- */
+   * Singleton pattern - get unique instance
+   */
   public static getInstance(): LocalStorageService {
     if (!LocalStorageService.instance) {
       LocalStorageService.instance = new LocalStorageService();
@@ -64,7 +64,7 @@ class LocalStorageService {
   }
 
   /**
-   * Lưu dữ liệu vào localStorage
+   * Save data to localStorage
    */
   public setItem<K extends keyof StorageData>(
     key: K,
@@ -81,7 +81,7 @@ class LocalStorageService {
         expiry: finalConfig.expiry ? Date.now() + finalConfig.expiry : null
       };
 
-      // Mã hóa dữ liệu nếu cần
+      // Encrypt data if needed
       if (finalConfig.encrypt) {
         dataToStore.value = encryptData(JSON.stringify(value));
         dataToStore.encrypted = true;
@@ -96,7 +96,7 @@ class LocalStorageService {
   }
 
   /**
-   * Lấy dữ liệu từ localStorage
+   * Get data from localStorage
    */
   public getItem<K extends keyof StorageData>(key: K): StorageData[K] | null {
     try {
@@ -109,13 +109,13 @@ class LocalStorageService {
 
       const parsedData = JSON.parse(storedData);
       
-      // Kiểm tra expiry
+      // Check expiry
       if (parsedData.expiry && Date.now() > parsedData.expiry) {
         this.removeItem(key);
         return null;
       }
 
-      // Giải mã dữ liệu nếu cần
+      // Decrypt data if needed
       if (parsedData.encrypted) {
         const decryptedValue = decryptData(parsedData.value);
         return JSON.parse(decryptedValue);
@@ -129,7 +129,7 @@ class LocalStorageService {
   }
 
   /**
-   * Xóa một item khỏi localStorage
+   * Remove an item from localStorage
    */
   public removeItem<K extends keyof StorageData>(key: K): boolean {
     try {
@@ -143,7 +143,7 @@ class LocalStorageService {
   }
 
   /**
-   * Xóa tất cả dữ liệu của ứng dụng
+   * Clear all application data
    */
   public clear(): boolean {
     try {
@@ -161,7 +161,7 @@ class LocalStorageService {
   }
 
   /**
-   * Kiểm tra xem một key có tồn tại không
+   * Check if a key exists
    */
   public hasItem<K extends keyof StorageData>(key: K): boolean {
     const storageKey = this.prefix + key;
@@ -169,7 +169,7 @@ class LocalStorageService {
   }
 
   /**
-   * Lấy kích thước dữ liệu đã sử dụng (bytes)
+   * Get used data size (bytes)
    */
   public getUsedSpace(): number {
     let totalSize = 0;
@@ -188,7 +188,7 @@ class LocalStorageService {
   }
 
   /**
-   * Lấy thông tin thống kê localStorage
+   * Get localStorage statistics
    */
   public getStats(): {
     totalItems: number;
@@ -237,7 +237,7 @@ class LocalStorageService {
   }
 
   /**
-   * Dọn dẹp dữ liệu đã hết hạn
+   * Clean up expired data
    */
   public cleanupExpiredData(): number {
     let cleanedCount = 0;
@@ -255,7 +255,7 @@ class LocalStorageService {
             }
           }
         } catch (error) {
-          // Xóa dữ liệu bị lỗi
+          // Remove corrupted data
           localStorage.removeItem(key);
           cleanedCount++;
         }
@@ -270,7 +270,7 @@ class LocalStorageService {
   }
 
   /**
-   * Backup dữ liệu localStorage
+   * Backup localStorage data
    */
   public backup(): string {
     const data: Record<string, any> = {};
@@ -290,7 +290,7 @@ class LocalStorageService {
   }
 
   /**
-   * Restore dữ liệu từ backup
+   * Restore data from backup
    */
   public restore(backupData: string): boolean {
     try {
@@ -319,7 +319,7 @@ class LocalStorageService {
   }
 
   /**
-   * Format bytes thành string dễ đọc
+   * Format bytes to readable string
    */
   private formatBytes(bytes: number): string {
     if (bytes === 0) return '0 Bytes';
@@ -332,7 +332,7 @@ class LocalStorageService {
   }
 
   /**
-   * Migrate dữ liệu cũ sang format mới
+   * Migrate old data to new format
    */
   public migrateOldData(): void {
     // Migrate user data

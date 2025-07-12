@@ -1,0 +1,23 @@
+{
+  "node": "v22.17.0",
+  "platform": "win32",
+  "arch": "x64",
+  "memory": {
+    "rss": 75911168,
+    "heapTotal": 34660352,
+    "heapUsed": 21707984,
+    "external": 2788188,
+    "arrayBuffers": 20875
+  },
+  "env": "development",
+  "timestamp": "2025-07-12T11:12:05.527Z",
+  "playwright": {
+    "version": "latest"
+  },
+  "config": {
+    "baseURL": "http://localhost:5175",
+    "timeout": 30000,
+    "retries": 1,
+    "workers": 1
+  }
+}

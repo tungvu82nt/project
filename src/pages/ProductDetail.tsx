@@ -6,6 +6,7 @@ import { products } from '../data/products';
 import { Product } from '../types';
 import { ProductViewer3D } from '../components/Product/ProductViewer3D';
 import { useLanguage } from '../contexts/LanguageContext';
+import { normalizeText, ensureDisplaySafe, fixVietnameseEncoding } from '../utils/encoding';
 
 interface ProductDetailProps {
   onAddToCart: (product: Product, quantity: number, color?: string, size?: string) => void;
@@ -35,29 +36,75 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ onAddToCart }) => 
     );
   }
 
-  // Get localized product data
+  // Get localized product data with encoding safety
   const getLocalizedName = () => {
-    return product.nameTranslations?.[language] || product.name;
+    let name = product.nameTranslations?.[language] || product.name;
+    name = normalizeText(name);
+    if (language === 'vi') {
+      name = fixVietnameseEncoding(name);
+    }
+    return ensureDisplaySafe(name);
   };
 
   const getLocalizedDescription = () => {
-    return product.descriptionTranslations?.[language] || product.description;
+    let description = product.descriptionTranslations?.[language] || product.description;
+    description = normalizeText(description);
+    if (language === 'vi') {
+      description = fixVietnameseEncoding(description);
+    }
+    return ensureDisplaySafe(description);
   };
 
   const getLocalizedColors = () => {
-    return product.colorsTranslations?.[language] || product.colors;
+    const colors = product.colorsTranslations?.[language] || product.colors;
+    return colors.map(color => {
+      let processedColor = normalizeText(color);
+      if (language === 'vi') {
+        processedColor = fixVietnameseEncoding(processedColor);
+      }
+      return ensureDisplaySafe(processedColor);
+    });
   };
 
   const getLocalizedSizes = () => {
-    return product.sizesTranslations?.[language] || product.sizes;
+    const sizes = product.sizesTranslations?.[language] || product.sizes;
+    return sizes.map(size => {
+      let processedSize = normalizeText(size);
+      if (language === 'vi') {
+        processedSize = fixVietnameseEncoding(processedSize);
+      }
+      return ensureDisplaySafe(processedSize);
+    });
   };
 
   const getLocalizedFeatures = () => {
-    return product.featuresTranslations?.[language] || product.features;
+    const features = product.featuresTranslations?.[language] || product.features;
+    return features.map(feature => {
+      let processedFeature = normalizeText(feature);
+      if (language === 'vi') {
+        processedFeature = fixVietnameseEncoding(processedFeature);
+      }
+      return ensureDisplaySafe(processedFeature);
+    });
   };
 
   const getLocalizedSpecifications = () => {
-    return product.specificationsTranslations?.[language] || product.specifications;
+    const specs = product.specificationsTranslations?.[language] || product.specifications;
+    const processedSpecs: Record<string, string> = {};
+    
+    Object.entries(specs).forEach(([key, value]) => {
+      let processedKey = normalizeText(key);
+      let processedValue = normalizeText(value);
+      
+      if (language === 'vi') {
+        processedKey = fixVietnameseEncoding(processedKey);
+        processedValue = fixVietnameseEncoding(processedValue);
+      }
+      
+      processedSpecs[ensureDisplaySafe(processedKey)] = ensureDisplaySafe(processedValue);
+    });
+    
+    return processedSpecs;
   };
 
   const handleAddToCart = () => {

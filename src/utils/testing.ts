@@ -6,7 +6,7 @@ import { AuthProvider } from '../contexts/AuthContext';
 
 // Mock data generators
 export const generateMockProduct = (overrides = {}) => ({
-  id: Math.random().toString(36).substr(2, 9),
+  id: Math.random().toString(36).substring(2, 11),
   name: 'Test Product',
   price: 99.99,
   originalPrice: 129.99,
@@ -24,7 +24,7 @@ export const generateMockProduct = (overrides = {}) => ({
 });
 
 export const generateMockUser = (overrides = {}) => ({
-  id: Math.random().toString(36).substr(2, 9),
+  id: Math.random().toString(36).substring(2, 11),
   name: 'Test User',
   email: 'test@example.com',
   role: 'customer' as const,
@@ -32,7 +32,7 @@ export const generateMockUser = (overrides = {}) => ({
 });
 
 export const generateMockOrder = (overrides = {}) => ({
-  id: `ORD-${Math.random().toString(36).substr(2, 9)}`,
+  id: `ORD-${Math.random().toString(36).substring(2, 11)}`,
   customerName: 'Test Customer',
   customerEmail: 'customer@example.com',
   items: [],

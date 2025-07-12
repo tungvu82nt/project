@@ -23,7 +23,7 @@ export const OrderConfirmationEmail: React.FC<EmailTemplateProps> = ({
     <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto' }}>
       {/* Header */}
       <div style={{ backgroundColor: '#3B82F6', padding: '20px', textAlign: 'center' }}>
-        <h1 style={{ color: 'white', margin: '0', fontSize: '24px' }}>EliteStore</h1>
+        <h1 style={{ color: 'white', margin: '0', fontSize: '24px' }}>Yapee</h1>
       </div>
 
       {/* Content */}
@@ -115,10 +115,10 @@ export const OrderConfirmationEmail: React.FC<EmailTemplateProps> = ({
         borderTop: '1px solid #E5E7EB'
       }}>
         <p style={{ color: '#6B7280', fontSize: '14px', margin: '0' }}>
-          Questions? Contact us at support@elitestore.com or +1 (555) 123-4567
+          Questions? Contact us at cskh@yapee.vn or 0333.938.014
         </p>
         <p style={{ color: '#9CA3AF', fontSize: '12px', margin: '10px 0 0 0' }}>
-          © 2024 EliteStore. All rights reserved.
+          © 2024 Yapee. All rights reserved.
         </p>
       </div>
     </div>
@@ -148,7 +148,7 @@ export const OrderStatusUpdateEmail: React.FC<{
     <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto' }}>
       {/* Header */}
       <div style={{ backgroundColor: '#3B82F6', padding: '20px', textAlign: 'center' }}>
-        <h1 style={{ color: 'white', margin: '0', fontSize: '24px' }}>EliteStore</h1>
+        <h1 style={{ color: 'white', margin: '0', fontSize: '24px' }}>Yapee</h1>
       </div>
 
       {/* Content */}
@@ -209,10 +209,10 @@ export const OrderStatusUpdateEmail: React.FC<{
         borderTop: '1px solid #E5E7EB'
       }}>
         <p style={{ color: '#6B7280', fontSize: '14px', margin: '0' }}>
-          Questions? Contact us at support@elitestore.com or +1 (555) 123-4567
-        </p>
+            Questions? Contact us at cskh@yapee.vn or 0333.938.014
+          </p>
         <p style={{ color: '#9CA3AF', fontSize: '12px', margin: '10px 0 0 0' }}>
-          © 2024 EliteStore. All rights reserved.
+          © 2024 Yapee. All rights reserved.
         </p>
       </div>
     </div>
